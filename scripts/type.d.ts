@@ -162,10 +162,10 @@ export type Item = {
 	복리후생?: string[]
 
 	/** 최초발생일 @example "2016-04-05" */
-	최초발생일?: Date
+	최초발생일?: string
 
 	/** 최종변동일 @example "2016-04-05" */
-	최종변동일?: Date
+	최종변동일?: string
 
 	/** 최종학력 @example "고등학교졸업 이상" */
 	최종학력: string
@@ -183,7 +183,7 @@ export type Item = {
 	담당업무?: string
 
 	/** 담당자연락처 @example "063-212-4314" */
-	담당자연락처: string
+	담당자연락처?: string
 
 	/** 대표연락처 @example "063-212-4314" */
 	대표연락처?: string
@@ -231,7 +231,7 @@ export type Item = {
 	전공계열명?: string
 
 	/** 마감일자 @example "2016-05-31" */
-	마감일자: Date
+	마감일자: string
 
 	/** 외국어코드 @example "03" */
 	외국어코드?: number
@@ -261,14 +261,14 @@ export type Item = {
 	유효여부: string
 
 	/** 사업자번호 @example "1398130999" */
-	사업자번호: number
+	사업자번호?: number
 
 	/** 모집인원명 @example "2명" */
-	모집인원명: string
+	모집인원명?: string
 
 	/** 근무형태명 @example "주5일" */
-	근무형태명: string
+	근무형태명?: string
 
 	/** 주소코드 @example "2820011100" */
-	주소코드: number
+	주소코드?: number
 }

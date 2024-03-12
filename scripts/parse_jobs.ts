@@ -28,11 +28,11 @@ export const parseJobs = (xml: string) => {
 
 const parseArr = (x?: string) => x?.split(",").map((x) => x.trim())
 
-function parseDate(x: string): Date
-function parseDate(x: string | undefined): Date | undefined
-function parseDate(x: string | undefined): Date | undefined {
+function parseDate(x: string): string
+function parseDate(x: string | undefined): string | undefined
+function parseDate(x: string | undefined): string | undefined {
 	return x
-		? new Date(`${x.slice(0, 4)}-${x.slice(4, 6)}-${x.slice(6)}`)
+		? new Date(`${x.slice(0, 4)}-${x.slice(4, 6)}-${x.slice(6)}`).toString()
 		: undefined
 }
 
