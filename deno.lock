@@ -1,0 +1,30 @@
+{
+  "version": "3",
+  "remote": {
+    "https://deno.land/x/escape@1.4.2/mod.ts": "6a30f506583e5d3bcc5f3cd2d42fba43af618833dc0f7754b374b6f7b21aaf68",
+    "https://esm.sh/txml@5.1.1": "5a894b9918bf278e72cf2d5232036af2b72ed8fe8d9e9bfcba998eef501f74e3",
+    "https://esm.sh/v133/inherits@2.0.4/denonext/inherits.mjs": "8095f3d6aea060c904fb24ae50f2882779c0acbe5d56814514c8b5153f3b4b3b",
+    "https://esm.sh/v133/readable-stream@3.6.2/denonext/readable-stream.mjs": "4d368fe1058f90ecfb37581103cae1646123180b8fc4aa77157fd733aed24e4a",
+    "https://esm.sh/v133/through2@3.0.2/denonext/through2.mjs": "868bf7f3e32a0b434c82597c5bda3fbc39cad0f27cbc64d4bc074543888fbe84",
+    "https://esm.sh/v133/txml@5.1.1/denonext/txml.mjs": "f5c3d5c70ca3b741745931727a5e5f6d0c824ff7f4a345c6b46bb776e01ee88a",
+    "https://esm.sh/v133/util-deprecate@1.0.2/denonext/util-deprecate.mjs": "f69f67cf655c38428b0934e0f7c865c055834a87cc3866b629d6b2beb21005e9"
+  },
+  "workspace": {
+    "packageJson": {
+      "dependencies": [
+        "npm:@types/react-dom@^18.2.21",
+        "npm:@types/react@^18.2.64",
+        "npm:@typescript-eslint/eslint-plugin@^7.1.1",
+        "npm:@typescript-eslint/parser@^7.1.1",
+        "npm:@vitejs/plugin-react-swc@^3.5.0",
+        "npm:eslint-plugin-react-hooks@^4.6.0",
+        "npm:eslint-plugin-react-refresh@^0.4.5",
+        "npm:eslint@^8.57.0",
+        "npm:react-dom@^18.2.0",
+        "npm:react@^18.2.0",
+        "npm:typescript@^5.2.2",
+        "npm:vite@^5.1.6"
+      ]
+    }
+  }
+}
