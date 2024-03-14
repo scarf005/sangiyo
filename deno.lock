@@ -2,6 +2,7 @@
   "version": "3",
   "remote": {
     "https://deno.land/x/escape@1.4.2/mod.ts": "6a30f506583e5d3bcc5f3cd2d42fba43af618833dc0f7754b374b6f7b21aaf68",
+    "https://deno.land/x/typed_regex@0.2.0/mod.ts": "2a51f6fca3f6cabe28d420680c4bc6609704e3cc833ba987efe2c44c911330bb",
     "https://esm.sh/txml@5.1.1": "5a894b9918bf278e72cf2d5232036af2b72ed8fe8d9e9bfcba998eef501f74e3",
     "https://esm.sh/v133/inherits@2.0.4/denonext/inherits.mjs": "8095f3d6aea060c904fb24ae50f2882779c0acbe5d56814514c8b5153f3b4b3b",
     "https://esm.sh/v133/readable-stream@3.6.2/denonext/readable-stream.mjs": "4d368fe1058f90ecfb37581103cae1646123180b8fc4aa77157fd733aed24e4a",
@@ -12,6 +13,9 @@
   "workspace": {
     "packageJson": {
       "dependencies": [
+        "npm:@mantine/core@^7.6.2",
+        "npm:@mantine/hooks@^7.6.2",
+        "npm:@tanstack/react-table@^8.13.2",
         "npm:@types/react-dom@^18.2.21",
         "npm:@types/react@^18.2.64",
         "npm:@typescript-eslint/eslint-plugin@^7.1.1",

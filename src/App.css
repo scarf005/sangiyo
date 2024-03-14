@@ -3,6 +3,10 @@
     padding: 2rem;
 }
 
+main {
+    width: 60vw;
+}
+
 table,
 th,
 td {

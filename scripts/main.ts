@@ -27,5 +27,7 @@ if (import.meta.main) {
 				await Deno.writeTextFile("./jobs.json", JSON.stringify(jobs, null, 2))
 			}
 			break
+		default:
+			console.log("Invalid command. Use 'fetch' or 'xml'")
 	}
 }

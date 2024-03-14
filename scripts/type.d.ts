@@ -215,8 +215,11 @@ export type Item = {
 	/** 급여조건코드 @example "6" */
 	급여조건코드: number
 
-	/** 급여조건명 @example "1800~2000만원" */
-	급여조건명: string
+	/** 급여 조건 범위 (단위: 만 원) @example 1800 */
+	최소급여: number
+
+	/** 급여 조건 범위 (단위: 만 원) @example 2000 */
+	최대급여: number
 
 	/** 홈페이지주소 */
 	홈페이지주소?: string
