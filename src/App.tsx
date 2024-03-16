@@ -4,13 +4,17 @@ import type { Item } from "../scripts/type.d.ts"
 import "./App.css"
 import json from "../scripts/jobs.json"
 import {
+	Anchor,
+	Card,
 	Checkbox,
 	Group,
 	List,
 	MultiSelect,
 	RangeSlider,
+	SimpleGrid,
 	Stack,
 	Text,
+	Title,
 } from "@mantine/core"
 import { useLocalStorage } from "@mantine/hooks"
 
@@ -141,13 +145,28 @@ export const App = () => {
 			</Stack>
 
 			<Text>총 {defaultData.length}중 {data.length}개</Text>
-			<List>
-				{data.map((item) => (
-					<List.Item key={item.채용번호}>
-						{item.업체명} - {item.채용제목} ({item.최소급여} ~ {item.최대급여})
-					</List.Item>
+			<SimpleGrid
+				cols={{ base: 1, sm: 2 }}
+				spacing="xs"
+			>
+				{data.map((x) => (
+					<Card shadow="xl" key={x.채용번호}>
+						<Anchor
+							href={`https://work.mma.go.kr/caisBYIS/search/cygonggogeomsaekView.do?cygonggo_no=${x.채용번호}`}
+							target="_blank"
+							rel="noreferrer"
+						>
+							<Title order={3}>{x.채용제목}</Title>
+						</Anchor>
+						<Text>
+							{x.업체명} - ({x.근무지주소})
+						</Text>
+						<Anchor href={x.홈페이지주소} target="_blank" rel="noreferrer">
+							{x.홈페이지주소}
+						</Anchor>
+					</Card>
 				))}
-			</List>
+			</SimpleGrid>
 		</main>
 	)
 }
