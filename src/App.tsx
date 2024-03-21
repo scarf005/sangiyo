@@ -1,16 +1,20 @@
-import { useMemo, useState } from "react"
+import { useMemo } from "react"
 
 import type { Item } from "../scripts/type.d.ts"
 import "./App.css"
+
 import json from "../scripts/jobs.json"
+import desc from "../scripts/descriptions.json"
+
 import {
 	Anchor,
 	Card,
 	Checkbox,
+	Grid,
 	Group,
-	List,
 	MultiSelect,
 	RangeSlider,
+	ScrollArea,
 	SimpleGrid,
 	Stack,
 	Text,
@@ -76,6 +80,7 @@ export const App = () => {
 		defaultValue: false,
 	})
 
+	// const data = []
 	const data = useFilter(defaultData, [
 		{ key: "역종분류명", xs: 역종 },
 		{ key: "요원구분명", xs: 요원 },
@@ -84,89 +89,111 @@ export const App = () => {
 		{ key: "근무지주소", xs: 주소 },
 	])
 
+	const PaySlider = () => (
+		<Group style={{ height: "5em" }}>
+			<Checkbox
+				checked={usePay}
+				onChange={(e) => setUsePay(e.currentTarget.checked)}
+			/>
+			<RangeSlider
+				style={{ width: "95%" }}
+				step={1}
+				min={0}
+				max={pays.length - 1}
+				minRange={1}
+				marks={payMarks}
+				disabled={!usePay}
+			/>
+		</Group>
+	)
+
+	const SelectGroup = () => (
+		<Stack gap="xs">
+			<MultiSelect
+				label="역종"
+				data={역종분류명}
+				value={역종}
+				onChange={(v) => set역종(v ?? [])}
+				clearable
+			/>
+			<MultiSelect
+				label="요원"
+				data={요원구분명}
+				value={요원}
+				onChange={(v) => set요원(v ?? [])}
+				clearable
+			/>
+			<MultiSelect
+				label="업종"
+				data={업종구분명}
+				value={업종}
+				onChange={(v) => set업종(v ?? [])}
+				clearable
+			/>
+
+			<MultiSelect
+				label="지역"
+				data={근무지시도}
+				value={지역}
+				onChange={(v) => set지역(v ?? [])}
+				clearable
+			/>
+			<MultiSelect
+				label="세부지역"
+				data={근무지주소.filter((x) => 지역.some((y) => x.startsWith(y)))
+					.sort()}
+				value={주소}
+				onChange={(v) => set주소(v ?? [])}
+				clearable
+			/>
+		</Stack>
+	)
 	return (
 		<main>
-			<Stack>
-				<Group grow>
-					<MultiSelect
-						label="역종"
-						data={역종분류명}
-						value={역종}
-						onChange={(v) => set역종(v ?? [])}
-						clearable
-					/>
-					<MultiSelect
-						label="요원"
-						data={요원구분명}
-						value={요원}
-						onChange={(v) => set요원(v ?? [])}
-						clearable
-					/>
-					<MultiSelect
-						label="업종"
-						data={업종구분명}
-						value={업종}
-						onChange={(v) => set업종(v ?? [])}
-						clearable
-					/>
-				</Group>
-
-				<Group grow>
-					<MultiSelect
-						label="지역"
-						data={근무지시도}
-						value={지역}
-						onChange={(v) => set지역(v ?? [])}
-						clearable
-					/>
-					<MultiSelect
-						label="세부지역"
-						data={근무지주소.filter((x) => 지역.some((y) => x.startsWith(y)))}
-						value={주소}
-						onChange={(v) => set주소(v ?? [])}
-						clearable
-					/>
-				</Group>
-				<Group style={{ height: "5em" }}>
-					<Checkbox
-						checked={usePay}
-						onChange={(e) => setUsePay(e.currentTarget.checked)}
-					/>
-					<RangeSlider
-						style={{ width: "95%" }}
-						step={1}
-						min={0}
-						max={pays.length - 1}
-						minRange={1}
-						marks={payMarks}
-						disabled={!usePay}
-					/>
-				</Group>
-			</Stack>
-
-			<Text>총 {defaultData.length}중 {data.length}개</Text>
-			<SimpleGrid
-				cols={{ base: 1, sm: 2 }}
-				spacing="xs"
-			>
-				{data.map((x) => (
-					<Card shadow="xl" key={x.채용번호}>
-						<Anchor
-							href={`https://work.mma.go.kr/caisBYIS/search/cygonggogeomsaekView.do?cygonggo_no=${x.채용번호}`}
-							target="_blank"
-							rel="noreferrer"
-						>
-							<Title order={3}>{x.채용제목}</Title>
-						</Anchor>
-						<Text>
-							{x.업체명} - ({x.근무지주소})
-						</Text>
-						<Anchor href={x.홈페이지주소} target="_blank" rel="noreferrer">
-							{x.홈페이지주소}
-						</Anchor>
-					</Card>
-				))}
-			</SimpleGrid>
+			<Grid overflow="hidden" h="100%">
+				<Grid.Col
+					span={6}
+					style={{
+						border: "2px solid green",
+						display: "flex",
+						flexDirection: "column",
+						height: "100%",
+					}}
+				>
+					<SelectGroup />
+					<PaySlider />
+					<Text>총 {defaultData.length}중 {data.length}개</Text>
+					<div style={{ overflowY: "scroll" }}>
+						<Stack>
+							{data.map((x) => (
+								<Card shadow="xl" key={x.채용번호}>
+									<Anchor
+										href={`https://work.mma.go.kr/caisBYIS/search/cygonggogeomsaekView.do?cygonggo_no=${x.채용번호}`}
+										target="_blank"
+										rel="noreferrer"
+									>
+										<Title order={3}>{x.채용제목}</Title>
+									</Anchor>
+									<Text>
+										{x.업체명} - ({x.근무지주소})
+									</Text>
+									<Anchor
+										href={x.홈페이지주소}
+										target="_blank"
+										rel="noreferrer"
+									>
+										{x.홈페이지주소}
+									</Anchor>
+									<Checkbox />
+								</Card>
+							))}
+						</Stack>
+					</div>
+				</Grid.Col>
+				<Grid.Col span={6}>
+					text
+				</Grid.Col>
+			</Grid>
 		</main>
 	)
 }
