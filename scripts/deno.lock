@@ -9,26 +9,5 @@
     "https://esm.sh/v133/through2@3.0.2/denonext/through2.mjs": "868bf7f3e32a0b434c82597c5bda3fbc39cad0f27cbc64d4bc074543888fbe84",
     "https://esm.sh/v133/txml@5.1.1/denonext/txml.mjs": "f5c3d5c70ca3b741745931727a5e5f6d0c824ff7f4a345c6b46bb776e01ee88a",
     "https://esm.sh/v133/util-deprecate@1.0.2/denonext/util-deprecate.mjs": "f69f67cf655c38428b0934e0f7c865c055834a87cc3866b629d6b2beb21005e9"
-  },
-  "workspace": {
-    "packageJson": {
-      "dependencies": [
-        "npm:@mantine/core@^7.6.2",
-        "npm:@mantine/hooks@^7.6.2",
-        "npm:@tanstack/react-table@^8.13.2",
-        "npm:@types/react-dom@^18.2.21",
-        "npm:@types/react@^18.2.64",
-        "npm:@typescript-eslint/eslint-plugin@^7.1.1",
-        "npm:@typescript-eslint/parser@^7.1.1",
-        "npm:@vitejs/plugin-react-swc@^3.5.0",
-        "npm:eslint-plugin-react-hooks@^4.6.0",
-        "npm:eslint-plugin-react-refresh@^0.4.5",
-        "npm:eslint@^8.57.0",
-        "npm:react-dom@^18.2.0",
-        "npm:react@^18.2.0",
-        "npm:typescript@^5.2.2",
-        "npm:vite@^5.1.6"
-      ]
-    }
   }
 }
