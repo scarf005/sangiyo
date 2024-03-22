@@ -275,3 +275,22 @@ export type Item = {
 	/** 주소코드 @example "2820011100" */
 	주소코드?: number
 }
+
+export type ItemDetail = {
+	비고: string | undefined
+	전직자_채용가능: string
+	출퇴근시간: string
+	특근_잔업: string
+	교대근무: string
+	수습기간: string
+	퇴직금지급: string
+	식사비지급: string
+	현역배정인원: string
+	현역편입인원: string
+	보충역배정인원: string
+	보충역편입인원: string
+	자격증: string
+	주소: string
+}
+
+export type JobEntry = Item & Partial<ItemDetail>

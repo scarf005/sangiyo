@@ -7,5 +7,6 @@
 		"semiColons": false,
 		"useTabs": true,
 		"proseWrap": "never"
-	}
+	},
+    "importMap": "./import_map.json"
 }

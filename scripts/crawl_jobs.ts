@@ -1,11 +1,13 @@
-import { pick } from "https://deno.land/std@0.220.1/collections/pick.ts"
-import { chunk } from "https://deno.land/std@0.220.1/collections/chunk.ts"
-
+import { pick } from "$std/collections/pick.ts"
+import { chunk } from "$std/collections/chunk.ts"
+import { decode } from "https://deno.land/x/html_entities@v1.0/lib/html5-entities.js"
+import type { ItemDetail } from "./type.d.ts"
 import {
 	DOMParser,
 	Element,
 	HTMLDocument,
 } from "https://deno.land/x/deno_dom@v0.1.43/deno-dom-wasm.ts"
+import { slugify } from "./slugify.ts"
 
 const crawlEndpoint =
 	"https://work.mma.go.kr/caisBYIS/search/cygonggogeomsaekView.do"
@@ -23,12 +25,12 @@ const tableToObject = (table: Element): Record<string, string> =>
 			if (x.children.length % 2 !== 0) return acc
 
 			chunk(Array.from(x.children), 2).forEach(([th, td]) => {
-				acc[th.innerText] = td.innerText
+				acc[slugify(th.innerText)] = td.innerText
 			})
 			return acc
 		}, {})
 
-export const parseCrawlJobs = (document: HTMLDocument) => {
+export const parseCrawlJobs = (document: HTMLDocument): ItemDetail | null => {
 	const tables = Array
 		.from(document.querySelectorAll("#content .step1 table")) as Element[]
 
@@ -47,19 +49,20 @@ export const parseCrawlJobs = (document: HTMLDocument) => {
 	return {
 		주소: tableToObject(병역지정업체정보)["주소"],
 		...pick(tableToObject(근무조건), [
-			"전직자 채용가능",
+			"전직자_채용가능",
 			"출퇴근시간",
-			"특근·잔업",
 			"교대근무",
 			"수습기간",
 			"퇴직금지급",
-			"식사(비)지급",
+			"식사비지급",
 			"현역배정인원",
 			"현역편입인원",
 			"보충역배정인원",
 			"보충역편입인원",
 			"자격증",
 		]),
-		비고: 비고.querySelector("td")?.innerText,
-	}
+		비고: 비고.querySelector("td") &&
+			decode(비고.querySelector("td")!.innerHTML.replaceAll("<br>", "\n"))
+				.trim(),
+	} as ItemDetail
 }
