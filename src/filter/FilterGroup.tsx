@@ -28,21 +28,21 @@ export const FilterGroup = () => {
 				label="역종"
 				data={역종분류명}
 				value={역종}
-				onChange={(v) => set역종(v ?? [])}
+				onChange={(v) => set역종(v)}
 				clearable
 			/>
 			<MultiSelect
 				label="요원"
 				data={요원구분명}
 				value={요원}
-				onChange={(v) => set요원(v ?? [])}
+				onChange={(v) => set요원(v)}
 				clearable
 			/>
 			<MultiSelect
 				label="업종"
 				data={업종구분명}
 				value={업종}
-				onChange={(v) => set업종(v ?? [])}
+				onChange={(v) => set업종(v)}
 				clearable
 			/>
 
@@ -50,7 +50,7 @@ export const FilterGroup = () => {
 				label="지역"
 				data={근무지시도}
 				value={지역}
-				onChange={(v) => set지역(v ?? [])}
+				onChange={(v) => set지역(v)}
 				clearable
 			/>
 			<MultiSelect
@@ -58,7 +58,7 @@ export const FilterGroup = () => {
 				data={근무지주소.filter((x) => 지역.some((y) => x.startsWith(y)))
 					.sort()}
 				value={주소}
-				onChange={(v) => set주소(v ?? [])}
+				onChange={(v) => set주소(v)}
 				clearable
 			/>
 		</Stack>
