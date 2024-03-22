@@ -2,8 +2,8 @@ import { unescapeHtml } from "https://deno.land/x/escape@1.4.2/mod.ts"
 import { Item, RawItem } from "./type.d.ts"
 import { typedRegEx } from "https://deno.land/x/typed_regex@0.2.0/mod.ts"
 
-// @deno-types="https://raw.githubusercontent.com/TobiasNickel/tXml/master/tXml.d.ts"
-import * as txml from "https://esm.sh/txml@5.1.1"
+// @deno-types="https://raw.githubusercontent.com/TobiasNickel/tXml/2e61554cc933cecfc7238b48cb60dc1ae77a2dd0/tXml.d.ts"
+import * as txml from "https://esm.sh/v135/txml@5.1.1/es2022/txml.mjs"
 
 type XMLResult = {
 	response: {

@@ -1,5 +1,4 @@
-# Simple workflow for deploying static content to GitHub Pages
-name: Deploy static content to Pages
+name: Deploy github pages
 
 on:
   push: { branches: [main] }
@@ -43,12 +42,14 @@ jobs:
       - name: Crawl jobs data
         run: deno run -A main.ts all
         working-directory: ./scripts
+        env:
+          API_KEY: ${{ secrets.API_KEY }}
 
       - name: Cache node modules
         uses: actions/cache@v4
         with:
           path: node_modules
-          key: ${{ hashFiles('**/package-lock.json') }}
+          key: ${{ hashFiles('pnpm-lock.yaml') }}
 
       - name: Install Pnpm
         uses: pnpm/action-setup@v2
