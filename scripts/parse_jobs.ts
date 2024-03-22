@@ -1,5 +1,6 @@
 import { unescapeHtml } from "https://deno.land/x/escape@1.4.2/mod.ts"
 import { Item, RawItem } from "./type.d.ts"
+import { typedRegEx } from "https://deno.land/x/typed_regex@0.2.0/mod.ts"
 
 // @deno-types="https://raw.githubusercontent.com/TobiasNickel/tXml/master/tXml.d.ts"
 import * as txml from "https://esm.sh/txml@5.1.1"
@@ -28,11 +29,11 @@ export const parseJobs = (xml: string) => {
 
 const parseArr = (x?: string) => x?.split(",").map((x) => x.trim())
 
-function parseDate(x: string): Date
-function parseDate(x: string | undefined): Date | undefined
-function parseDate(x: string | undefined): Date | undefined {
+function parseDate(x: string): string
+function parseDate(x: string | undefined): string | undefined
+function parseDate(x: string | undefined): string | undefined {
 	return x
-		? new Date(`${x.slice(0, 4)}-${x.slice(4, 6)}-${x.slice(6)}`)
+		? new Date(`${x.slice(0, 4)}-${x.slice(4, 6)}-${x.slice(6)}`).toISOString()
 		: undefined
 }
 
@@ -40,6 +41,23 @@ function parseNum(x: string): number
 function parseNum(x?: string): number | undefined
 function parseNum(x?: string): number | undefined {
 	return x ? parseInt(x, 10) : undefined
+}
+
+const payReRange = typedRegEx("(?<min>\\d+)~(?<max>\\d+)만원")
+const payReBelow = typedRegEx("(?<max>\\d+)만원이하")
+
+const parsePay = (x: string) => {
+	const below = payReBelow.captures(x)
+	if (below) {
+		return { 최소급여: 0, 최대급여: parseInt(below.max, 10) }
+	}
+
+	const { min, max } = payReRange.captures(x)!
+
+	return {
+		최소급여: parseInt(min, 10),
+		최대급여: parseInt(max, 10),
+	}
 }
 
 export const parseRawItem = (x: RawItem): Item => ({
@@ -62,7 +80,7 @@ export const parseRawItem = (x: RawItem): Item => ({
 	경력년수: x.grNs,
 	경력구분: x.gyeongryeokGbcdNm,
 	급여조건코드: parseNum(x.gyjogeonCd),
-	급여조건명: x.gyjogeonCdNm,
+	...parsePay(x.gyjogeonCdNm),
 	홈페이지주소: x.hmpgAddr,
 	접수방법: parseArr(x.jeopsubb),
 	전공계열코드: parseNum(x.jggyeyeolCd),
@@ -119,7 +137,7 @@ if (import.meta.main) {
 		"yuhyoYn": "Y",
 	}
 
-    // @ts-expect-error: 몇몇 스펙이 실제 반환값과 다름
+	// @ts-expect-error: 몇몇 스펙이 실제 반환값과 다름
 	const result = parseRawItem(json)
 	console.log(Deno.inspect(result, { colors: true, depth: Infinity }))
 

@@ -1,0 +1,6 @@
+{
+	"tasks": {
+		"cli": "deno run -A --env=.env main.ts"
+	},
+	"importMap": "../import_map.json"
+}

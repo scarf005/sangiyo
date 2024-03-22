@@ -1,8 +1,12 @@
 {
 	"exclude": ["dist"],
+	"tasks": {
+		"cli": "deno task --cwd=scripts cli"
+	},
 	"fmt": {
 		"semiColons": false,
 		"useTabs": true,
 		"proseWrap": "never"
-	}
+	},
+    "importMap": "./import_map.json"
 }
