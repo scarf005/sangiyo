@@ -109,7 +109,10 @@ const getData = () =>
 	getOrCreate({
 		name: "all data",
 		path: cachePaths.data,
-		fn: async () => deepMerge(await getJobs(), await getDetails()),
+		fn: async () => ({
+			date: new Date().toISOString(),
+			data: deepMerge(await getJobs(), await getDetails()),
+		}),
 	})
 
 if (import.meta.main) {

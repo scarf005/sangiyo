@@ -2,7 +2,7 @@ import type { JobEntry } from "../../scripts/type.d.ts"
 import rawData from "../data.json"
 import { distinct } from "../utils.ts"
 
-export const data: Record<string, JobEntry> = rawData
+export const data: Record<string, JobEntry> = rawData.data
 
 export const dataList: JobEntry[] = Object.values(data)
 export const 역종분류명 = distinct(dataList.map((item) => item.역종분류명))

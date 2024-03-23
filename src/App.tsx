@@ -6,6 +6,7 @@ import { FilterGroup } from "./filter/FilterGroup.tsx"
 import { JobDetailArea } from "./detail/JobDetail.tsx"
 import { FilterResultArea } from "./filter/FilterResultArea.tsx"
 import { JobsListArea } from "./jobslist/JobsListArea.tsx"
+import { UpdateArea } from "./UpdateArea.tsx"
 
 export const App = () => {
 	return (
@@ -20,6 +21,7 @@ export const App = () => {
 					}}
 				>
 					<FilterGroup />
+					<UpdateArea />
 					<FilterResultArea />
 					<JobsListArea />
 				</Grid.Col>
