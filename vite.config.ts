@@ -8,5 +8,6 @@ export default defineConfig({
 	build: {
 		target: "es2022",
 		rollupOptions: { input: ["src/data.json", "index.html"] },
+		sourcemap: true,
 	},
 })
